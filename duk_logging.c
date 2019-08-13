@@ -135,7 +135,10 @@ static duk_ret_t duk__logger_prototype_log_shared(duk_context *ctx) {
 	duk_size_t arg_len;
 	duk_uint8_t *buf, *p;
 	const duk_uint8_t *q;
-	duk_uint8_t date_buf[32];  /* maximum format length is 24+1 (NUL), round up. */
+	/* maximum format length is 24+1 (NUL), but compiler evaluates the
+	* format directives to max 85, so use that to avoid compiler warnings
+	*/
+	duk_uint8_t date_buf[85];
 	duk_size_t date_len;
 	duk_small_int_t rc;
 
